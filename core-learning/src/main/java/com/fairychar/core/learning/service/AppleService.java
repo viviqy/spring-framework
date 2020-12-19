@@ -1,23 +1,16 @@
-package com.fairychar.core.learning;
+package com.fairychar.core.learning.service;
 
-import com.fairychar.core.learning.beans.Apple;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
 
 /**
- * Datetime: 2020/12/17 17:46 <br>
+ * Datetime: 2020/12/18 12:49 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-@ComponentScan(basePackages = "com.fairychar.core.learning")
-public class App {
-	public static void main(String[] args) {
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(App.class);
-		Apple bean = context.getBean(Apple.class);
-		System.out.println(bean);
-	}
+@Service
+public class AppleService {
+
 }
 /*
                                       /[-])//  ___        

@@ -1,23 +1,20 @@
-package com.fairychar.core.learning;
+package com.fairychar.core.learning.beans;
 
-import com.fairychar.core.learning.beans.Apple;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * Datetime: 2020/12/17 17:46 <br>
+ * Datetime: 2020/12/18 12:50 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-@ComponentScan(basePackages = "com.fairychar.core.learning")
-public class App {
-	public static void main(String[] args) {
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(App.class);
-		Apple bean = context.getBean(Apple.class);
-		System.out.println(bean);
-	}
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class Apple {
+	private String color;
 }
 /*
                                       /[-])//  ___        

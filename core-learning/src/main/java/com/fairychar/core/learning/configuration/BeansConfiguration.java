@@ -1,22 +1,21 @@
-package com.fairychar.core.learning;
+package com.fairychar.core.learning.configuration;
 
 import com.fairychar.core.learning.beans.Apple;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
- * Datetime: 2020/12/17 17:46 <br>
+ * Datetime: 2020/12/18 13:27 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-@ComponentScan(basePackages = "com.fairychar.core.learning")
-public class App {
-	public static void main(String[] args) {
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(App.class);
-		Apple bean = context.getBean(Apple.class);
-		System.out.println(bean);
+@Configuration
+public class BeansConfiguration {
+	@Bean
+	Apple apple(){
+		System.out.println("apple initialized");
+		return new Apple();
 	}
 }
 /*
