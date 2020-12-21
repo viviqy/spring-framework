@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @author chiyo <br>
  * @since 1.0
  */
-@ComponentScan(basePackages = "com.fairychar.core.learning")
+//@ComponentScan(basePackages = "com.fairychar.core.learning")
 public class App {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(App.class);
