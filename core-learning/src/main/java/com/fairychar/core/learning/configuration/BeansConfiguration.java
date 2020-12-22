@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeansConfiguration {
 	@Bean
-	Apple apple(){
+	Apple apple() {
 		System.out.println("apple initialized");
 		return new Apple();
 	}

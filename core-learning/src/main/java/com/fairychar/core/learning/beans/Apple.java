@@ -1,8 +1,6 @@
-package com.fairychar.core.learning.beans;
+// CHECKSTYLE:OFF
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+package com.fairychar.core.learning.beans;
 
 /**
  * Datetime: 2020/12/18 12:50 <br>
@@ -10,9 +8,6 @@ import lombok.NoArgsConstructor;
  * @author chiyo <br>
  * @since 1.0
  */
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 public class Apple {
 	private String color;
 }

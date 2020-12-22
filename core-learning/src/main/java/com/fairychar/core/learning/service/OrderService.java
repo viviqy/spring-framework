@@ -1,21 +1,19 @@
-package com.fairychar.core.learning;
+package com.fairychar.core.learning.service;
 
-import com.fairychar.core.learning.beans.Apple;
-import com.fairychar.core.learning.configuration.AppConfiguration;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
- * Datetime: 2020/12/17 17:46 <br>
+ * Datetime: 2020/12/22 15:25 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-public class App {
-	public static void main(String[] args) {
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
-		Apple bean = context.getBean(Apple.class);
-		System.out.println(bean);
-	}
+@Service
+public class OrderService {
+
+	@Autowired
+	private CustomerService customerService;
 }
 /*
                                       /[-])//  ___        
