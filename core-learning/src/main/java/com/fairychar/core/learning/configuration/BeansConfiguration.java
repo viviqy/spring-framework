@@ -13,10 +13,12 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class BeansConfiguration {
-	@Bean
+	@Bean(initMethod = "init",destroyMethod = "eat")
 	Apple apple() {
 		WrapUtil.wrapPrintln("apple initialized");
-		return new Apple();
+		Apple apple = new Apple();
+		apple.setColor("red");
+		return apple;
 	}
 }
 /*

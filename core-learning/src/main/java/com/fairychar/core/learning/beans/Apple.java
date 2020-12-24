@@ -2,6 +2,8 @@
 
 package com.fairychar.core.learning.beans;
 
+import com.fairychar.core.learning.utils.WrapUtil;
+
 /**
  * Datetime: 2020/12/18 12:50 <br>
  *
@@ -18,12 +20,27 @@ public class Apple {
 	public Apple() {
 	}
 
+	public void  init(){
+		WrapUtil.wrapPrintln("apple init...");
+	}
+
+	public void eat(){
+		WrapUtil.wrapPrintln("eat this apple(destroy)");
+	}
+
 	public String getColor() {
 		return color;
 	}
 
 	public void setColor(String color) {
 		this.color = color;
+	}
+
+	@Override
+	public String toString() {
+		return "Apple{" +
+				"color='" + color + '\'' +
+				'}';
 	}
 }
 /*

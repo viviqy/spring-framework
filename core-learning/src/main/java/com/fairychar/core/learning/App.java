@@ -12,7 +12,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  */
 public class App {
 	public static void main(String[] args) {
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+		context.register(AppConfiguration.class);
+		context.refresh();
 		Apple bean = context.getBean(Apple.class);
 		System.out.println(bean);
 	}
