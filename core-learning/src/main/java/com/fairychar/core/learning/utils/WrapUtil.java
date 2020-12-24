@@ -1,29 +1,29 @@
-// CHECKSTYLE:OFF
+package com.fairychar.core.learning.utils;
 
-package com.fairychar.core.learning.beans;
+import java.util.stream.IntStream;
 
 /**
- * Datetime: 2020/12/18 12:50 <br>
+ * Datetime: 2020/12/24 12:44 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-public class Apple {
-	private String color;
+public final class WrapUtil {
 
-	public Apple(String color) {
-		this.color = color;
+	public static void wrapPrintln(String text) {
+		System.out.println();
+		IntStream.range(0, text.length() + 6).forEach(s -> {
+			System.out.print("=");
+		});
+		System.out.println();
+		System.out.println("|| " + text + " ||");
+		IntStream.range(0, text.length() + 6).forEach(s -> {
+			System.out.print("=");
+		});
+		System.out.println();
 	}
 
-	public Apple() {
-	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
+	private WrapUtil() {
 	}
 }
 /*

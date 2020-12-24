@@ -1,29 +1,16 @@
-// CHECKSTYLE:OFF
-
-package com.fairychar.core.learning.beans;
+import com.fairychar.core.learning.utils.WrapUtil;
+import org.junit.Test;
 
 /**
- * Datetime: 2020/12/18 12:50 <br>
+ * Datetime: 2020/12/24 12:48 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-public class Apple {
-	private String color;
-
-	public Apple(String color) {
-		this.color = color;
-	}
-
-	public Apple() {
-	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
+public class TestMain {
+	@Test
+	public void testWrap(){
+		WrapUtil.wrapPrintln("hahah");
 	}
 }
 /*
@@ -31,7 +18,7 @@ public class Apple {
                                  __ --\ `_/~--|  / \      
                                /_-/~~--~~ /~~~\\_\ /\     
                                |  |___|===|_-- | \ \ \    
-____________ _/~~~~~~~~|~~\,   ---|---\___/----|  \/\-\   
+____________ _/~~~~~~~~|~~\,   ---|---\___/----|  \/\-\   2
 ____________ ~\________|__/   / // \__ |  ||  / | |   | | 
                       ,~-|~~~~~\--, | \|--|/~|||  |   | | 
                       [3-|____---~~ _--'==;/ _,   |   |_| 

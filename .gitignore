@@ -44,3 +44,4 @@ atlassian-ide-plugin.xml
 gradle/wrapper/gradle-wrapper.properties
 *.jar
 /**/tmp
+/**/build/reports

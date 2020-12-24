@@ -1,6 +1,7 @@
 package com.fairychar.core.learning.configuration;
 
 import com.fairychar.core.learning.beans.Apple;
+import com.fairychar.core.learning.utils.WrapUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 public class BeansConfiguration {
 	@Bean
 	Apple apple() {
-		System.out.println("apple initialized");
+		WrapUtil.wrapPrintln("apple initialized");
 		return new Apple();
 	}
 }
