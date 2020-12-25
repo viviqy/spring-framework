@@ -1,9 +1,13 @@
 package com.fairychar.core.learning.configuration;
 
 import com.fairychar.core.learning.beans.Apple;
+import com.fairychar.core.learning.beans.DaShen;
+import com.fairychar.core.learning.beans.XiaoQi;
 import com.fairychar.core.learning.utils.WrapUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.core.annotation.AliasFor;
 
 /**
  * Datetime: 2020/12/18 13:27 <br>
@@ -15,10 +19,22 @@ import org.springframework.context.annotation.Configuration;
 public class BeansConfiguration {
 	@Bean(initMethod = "init",destroyMethod = "eat")
 	Apple apple() {
-		WrapUtil.wrapPrintln("apple initialized");
+		WrapUtil.wrapPrintln("apple beansConfiguraion");
 		Apple apple = new Apple();
 		apple.setColor("red");
 		return apple;
+	}
+
+
+	@Bean
+	@DependsOn("daShen")
+	XiaoQi xiaoQi(){
+		return new XiaoQi();
+	}
+
+	@Bean
+	DaShen daShen(){
+		return new DaShen();
 	}
 }
 /*

@@ -1,20 +1,39 @@
-package com.fairychar.core.learning.service;
+package com.fairychar.core.learning.beans;
 
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.Scope;
 
 /**
- * Datetime: 2020/12/18 12:49 <br>
+ * Datetime: 2020/12/25 10:37 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-@Service
-public class AppleService  {
+@Scope("fenXiang")
+public class DaShen {
 
+	private String attack;
 
+	@Override
+	public String toString() {
+		return "DaShen{" +
+				"attack='" + attack + '\'' +
+				'}';
+	}
+
+	public String getAttack() {
+		return attack;
+	}
+
+	public void setAttack(String attack) {
+		this.attack = attack;
+	}
+
+	public DaShen() {
+	}
+
+	public DaShen(String attack) {
+		this.attack = attack;
+	}
 }
 /*
                                       /[-])//  ___        

@@ -248,11 +248,13 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	protected <T> T doGetBean(
 			String name, @Nullable Class<T> requiredType, @Nullable Object[] args, boolean typeCheckOnly)
 			throws BeansException {
-
+		/*note 解析bean的别名,比如一个apple bean,Alias一个jobs bean,jobs bean在alias一个ceo bean,通过ceo获取到
+		apple为解析别名*/
 		String beanName = transformedBeanName(name);
 		Object bean;
 
 		// Eagerly check singleton cache for manually registered singletons.
+		/*note 尝试从单例缓冲池中获取对象*/
 		Object sharedInstance = getSingleton(beanName);
 		if (sharedInstance != null && args == null) {
 			if (logger.isTraceEnabled()) {
@@ -275,7 +277,9 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			}
 
 			// Check if bean definition exists in this factory.
+			/*note 尝试从父容器中去获取bean,spring mvc模式下会存在父子容器*/
 			BeanFactory parentBeanFactory = getParentBeanFactory();
+			/*note 若存在父工厂且当前bean工厂不存在当前bean的定义,那么bean定义是存在父BeanFactory中*/
 			if (parentBeanFactory != null && !containsBeanDefinition(beanName)) {
 				// Not found -> check parent.
 				String nameToLookup = originalBeanName(name);
@@ -306,10 +310,12 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				if (requiredType != null) {
 					beanCreation.tag("beanType", requiredType::toString);
 				}
+				/*note 获取当前bean的Bean定义*/
 				RootBeanDefinition mbd = getMergedLocalBeanDefinition(beanName);
 				checkMergedBeanDefinition(mbd, beanName, args);
 
 				// Guarantee initialization of beans that the current bean depends on.
+				/*note 获取bean是否存在依赖bean,如果存在则等待依赖的bean实例化完成后再实例化自己*/
 				String[] dependsOn = mbd.getDependsOn();
 				if (dependsOn != null) {
 					for (String dep : dependsOn) {
@@ -329,9 +335,10 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				}
 
 				// Create bean instance.
+				/*note 判断bean是否单例,是则创建单例bean*/
 				if (mbd.isSingleton()) {
 					sharedInstance = getSingleton(beanName, () -> {
-						try {
+						try { 
 							return createBean(beanName, mbd, args);
 						}
 						catch (BeansException ex) {
@@ -1468,7 +1475,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	 */
 	protected void checkMergedBeanDefinition(RootBeanDefinition mbd, String beanName, @Nullable Object[] args)
 			throws BeanDefinitionStoreException {
-
+		/*note 监测当前bean定义是不是抽象bean*/
 		if (mbd.isAbstract()) {
 			throw new BeanIsAbstractException(beanName);
 		}

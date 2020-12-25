@@ -14,14 +14,17 @@ public class Apple {
 	private String color;
 
 	public Apple(String color) {
+		WrapUtil.wrapPrintln("apple constructure with 1 param");
 		this.color = color;
 	}
 
 	public Apple() {
+		WrapUtil.wrapPrintln("apple constructure");
 	}
 
+
 	public void  init(){
-		WrapUtil.wrapPrintln("apple init...");
+		WrapUtil.wrapPrintln("apple init method...");
 	}
 
 	public void eat(){
