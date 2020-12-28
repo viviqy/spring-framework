@@ -1,46 +1,31 @@
-package com.fairychar.core.learning.configuration;
+package com.fairychar.core.learning.beans;
 
-import com.fairychar.core.learning.beans.Apple;
-import com.fairychar.core.learning.beans.DaShen;
-import com.fairychar.core.learning.beans.LazyBean;
-import com.fairychar.core.learning.beans.XiaoQi;
-import com.fairychar.core.learning.utils.WrapUtil;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Lazy;
 
 /**
- * Datetime: 2020/12/18 13:27 <br>
+ * Datetime: 2020/12/28 17:35 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-@Configuration
-public class BeansConfiguration {
-	@Bean(initMethod = "init", destroyMethod = "eat")
-	Apple apple() {
-		WrapUtil.wrapPrintln("apple beansConfiguraion");
-		Apple apple = new Apple();
-		apple.setColor("red");
-		return apple;
+@Lazy
+public class LazyBean {
+	private int age;
+
+
+	public int getAge() {
+		return age;
 	}
 
-
-	@Bean
-	@DependsOn("daShen")
-	XiaoQi xiaoQi() {
-		return new XiaoQi();
+	public void setAge(int age) {
+		this.age = age;
 	}
 
-	@Bean
-	DaShen daShen() {
-		return new DaShen();
+	public LazyBean() {
 	}
 
-	@Bean
-	LazyBean lazyBean() {
-		WrapUtil.wrapPrintln("lazy bean created");
-		return new LazyBean(10);
+	public LazyBean(int age) {
+		this.age = age;
 	}
 }
 /*
