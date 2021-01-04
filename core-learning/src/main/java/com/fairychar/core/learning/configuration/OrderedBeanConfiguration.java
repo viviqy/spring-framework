@@ -1,31 +1,46 @@
-package com.fairychar.core.learning.service;
+package com.fairychar.core.learning.configuration;
 
-import com.fairychar.core.learning.utils.WrapUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.fairychar.core.learning.beans.Apple;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 
 /**
- * Datetime: 2020/12/22 15:25 <br>
+ * Datetime: 2021/1/4 11:08 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-@Service
-public class OrderService {
+//@Configuration
+public class OrderedBeanConfiguration {
+	@Bean
+	@Order(Ordered.LOWEST_PRECEDENCE-3)
+	Apple apple1(){
+		System.out.println("apple 1");
+		return new Apple();
+	}
 
-	@Autowired
-	private CustomerService customerService;
+	@Bean
+	@Order(Ordered.LOWEST_PRECEDENCE-2)
+	Apple apple2(){
+		System.out.println("apple 2");
+		return new Apple();
+	}
 
-	public void customerBean(){
-		WrapUtil.wrapPrintln(customerService.toString());
+	@Bean
+	@Order(Ordered.LOWEST_PRECEDENCE-1)
+	Apple apple3(){
+		System.out.println("apple 3");
+		return new Apple();
 	}
 
 
-	@Override
-	public String toString() {
-		return "OrderService{" +
-				"customerService=" + customerService.hashCode() +
-				'}';
+	@Bean
+	@Order(Ordered.LOWEST_PRECEDENCE-6)
+	Apple apple4(){
+		System.out.println("apple 4");
+		return new Apple();
 	}
 }
 /*

@@ -1,31 +1,35 @@
-package com.fairychar.core.learning.service;
+package com.fairychar.core.learning.proccessor;
 
-import com.fairychar.core.learning.utils.WrapUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.fairychar.core.learning.beans.Apple;
+import com.fairychar.core.learning.beans.SecondDog;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.support.GenericBeanDefinition;
+import org.springframework.stereotype.Component;
 
 /**
- * Datetime: 2020/12/22 15:25 <br>
+ * Datetime: 2021/1/4 11:31 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-@Service
-public class OrderService {
-
-	@Autowired
-	private CustomerService customerService;
-
-	public void customerBean(){
-		WrapUtil.wrapPrintln(customerService.toString());
-	}
-
-
+@Component
+public class ChangeBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
+	/**
+	 * Modify the application context's internal bean factory after its standard
+	 * initialization. All bean definitions will have been loaded, but no beans
+	 * will have been instantiated yet. This allows for overriding or adding
+	 * properties even to eager-initializing beans.
+	 *
+	 * @param beanFactory the bean factory used by the application context
+	 * @throws BeansException in case of errors
+	 */
 	@Override
-	public String toString() {
-		return "OrderService{" +
-				"customerService=" + customerService.hashCode() +
-				'}';
+	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+		GenericBeanDefinition firstDog = (GenericBeanDefinition) beanFactory.getBeanDefinition("firstDog");
+		System.out.println(firstDog.toString());
+		firstDog.setBeanClass(SecondDog.class);
 	}
 }
 /*

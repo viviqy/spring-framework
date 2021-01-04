@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Scope;
  * @since 1.0
  */
 @Lazy
-@Scope("hehuan")
 public class XiaoQi {
 	private String attack;
 

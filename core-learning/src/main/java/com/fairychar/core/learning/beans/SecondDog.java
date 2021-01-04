@@ -1,31 +1,28 @@
-package com.fairychar.core.learning.service;
+package com.fairychar.core.learning.beans;
 
 import com.fairychar.core.learning.utils.WrapUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
- * Datetime: 2020/12/22 15:25 <br>
+ * Datetime: 2021/1/4 11:33 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-@Service
-public class OrderService {
+//@Component
+public class SecondDog {
 
-	@Autowired
-	private CustomerService customerService;
-
-	public void customerBean(){
-		WrapUtil.wrapPrintln(customerService.toString());
+	public void wangwang() {
+		WrapUtil.wrapPrintln("second dog wang wang");
 	}
 
+	public void second(){
+		WrapUtil.wrapPrintln("dong er gou zi");
+	}
 
 	@Override
 	public String toString() {
-		return "OrderService{" +
-				"customerService=" + customerService.hashCode() +
-				'}';
+		return "SecondDog{}";
 	}
 }
 /*

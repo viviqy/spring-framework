@@ -8,6 +8,7 @@ import com.fairychar.core.learning.utils.WrapUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Lazy;
 
 /**
  * Datetime: 2020/12/18 13:27 <br>
@@ -38,6 +39,7 @@ public class BeansConfiguration {
 	}
 
 	@Bean
+	@Lazy
 	LazyBean lazyBean() {
 		WrapUtil.wrapPrintln("lazy bean created");
 		return new LazyBean(10);

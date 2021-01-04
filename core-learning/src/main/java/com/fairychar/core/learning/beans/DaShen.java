@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Scope;
  * @author chiyo <br>
  * @since 1.0
  */
-@Scope("fenXiang")
 public class DaShen {
 
 	private String attack;

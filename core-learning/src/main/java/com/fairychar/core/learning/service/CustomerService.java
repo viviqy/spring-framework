@@ -38,6 +38,13 @@ public class CustomerService implements InitializingBean {
 	public void afterPropertiesSet() throws Exception {
 		WrapUtil.wrapPrintln("into customerService afterProperties...");
 	}
+
+	@Override
+	public String toString() {
+		return "CustomerService{" +
+				"orderService=" + orderService.hashCode() +
+				'}';
+	}
 }
 /*
                                       /[-])//  ___        

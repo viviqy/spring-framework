@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Lazy;
  * @author chiyo <br>
  * @since 1.0
  */
-@Lazy
 public class LazyBean {
 	private int age;
 
