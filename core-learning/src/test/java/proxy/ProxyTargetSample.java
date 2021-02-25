@@ -1,55 +1,68 @@
-import com.fairychar.core.learning.utils.WrapUtil;
-import org.junit.Test;
+package proxy;
 
 /**
- * Datetime: 2020/12/24 12:48 <br>
+ * Datetime: 2021/2/25 11:15 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-public class TestMain {
-	private static final Object LOCK = new Object();
+public class ProxyTargetSample {
 
-	@Test
-	public void testWrap() {
-		WrapUtil.wrapPrintln("hahah");
+	public static void main(String[] args) {
+		ShowName showName = new ShowName();
+		ShowAge showAge = new ShowAge(showName);
+		ShowGenger showGenger = new ShowGenger(showAge);
+		showGenger.show();
 	}
 
-	@Test
-	public void testLock() throws InterruptedException {
-		int N = 10;
-		Thread[] threads = new Thread[10];
-		for (int i = 0; i < N; i++) {
-			threads[i] = new Thread(() -> {
-				System.out.println(Thread.currentThread().getName() + " begin...");
-				synchronized (LOCK) {
-					System.out.println(Thread.currentThread().getName() + "get sync lock!");
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}, "thread [" + i + "]");
-		}
-		synchronized (LOCK) {
-			for (int i = 0; i < N; i++) {
-				threads[i].start();
-				System.out.println(threads[i].getName() + " start!");
-				Thread.sleep(200);
-			}
-			Thread.sleep(200);
-		}
-		Thread.currentThread().join();
+	interface Showable {
+		void show();
 	}
 
+	static class ShowGenger implements Showable {
+		public ShowGenger(Showable target) {
+			this.target = target;
+		}
+
+		private Showable target;
+
+		@Override
+		public void show() {
+			System.out.println("show gender");
+			System.out.println("===========");
+			target.show();
+		}
+	}
+
+
+	static class ShowAge implements Showable {
+		public ShowAge(Showable target) {
+			this.target = target;
+		}
+
+		Showable target;
+
+		@Override
+		public void show() {
+			System.out.println("show age");
+			System.out.println("========");
+			target.show();
+		}
+	}
+
+	static class ShowName implements Showable {
+		@Override
+		public void show() {
+			System.out.println("show name");
+		}
+	}
 }
 /*
                                       /[-])//  ___        
                                  __ --\ `_/~--|  / \      
                                /_-/~~--~~ /~~~\\_\ /\     
                                |  |___|===|_-- | \ \ \    
-____________ _/~~~~~~~~|~~\,   ---|---\___/----|  \/\-\   2
+____________ _/~~~~~~~~|~~\,   ---|---\___/----|  \/\-\   
 ____________ ~\________|__/   / // \__ |  ||  / | |   | | 
                       ,~-|~~~~~\--, | \|--|/~|||  |   | | 
                       [3-|____---~~ _--'==;/ _,   |   |_| 

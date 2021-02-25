@@ -1,3 +1,5 @@
+package proxy;
+
 import org.springframework.context.annotation.Scope;
 
 import java.lang.reflect.InvocationHandler;
