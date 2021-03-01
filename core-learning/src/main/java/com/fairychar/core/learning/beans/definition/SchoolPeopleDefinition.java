@@ -1,19 +1,30 @@
-package com.fairychar.core.learning.configuration;
-
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+package com.fairychar.core.learning.beans.definition;
 
 /**
- * Datetime: 2020/12/22 15:23 <br>
- *
+ * Datetime: 2021/3/1 15:41 <br>
+ * 当做RootBeanDefinition使用
  * @author chiyo <br>
  * @since 1.0
  */
-@ComponentScan(basePackages = "com.fairychar")
-//打开此注解会报错java.lang.NoClassDefFoundError: org/aspectj/lang/annotation/Pointcut
-//暂时关闭,之后学习到这里在处理
-//@EnableAspectJAutoProxy()
-public class AppConfiguration {
+public class SchoolPeopleDefinition {
+	private int id;
+	private String name;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }
 /*
                                       /[-])//  ___        

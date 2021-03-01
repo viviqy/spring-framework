@@ -262,6 +262,9 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 		return null;
 	}
 
+	/*
+	* 作为父bd时会报异常
+	* */
 	@Override
 	public void setParentName(@Nullable String parentName) {
 		if (parentName != null) {
