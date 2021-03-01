@@ -5,9 +5,10 @@ import com.fairychar.core.learning.beans.SecondDog;
 import com.fairychar.core.learning.configuration.AppConfiguration;
 import com.fairychar.core.learning.service.CustomerService;
 import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import static com.fairychar.core.learning.utils.WrapUtil.wrapPrintln;
+
 /**
  * Datetime: 2020/12/17 17:46 <br>
  *
@@ -26,12 +27,13 @@ public class App {
 		context.refresh();
 
 		changeBeanFromBeanFactoryPostProcessor();
-		cycleBean();
+		circularDependencyBean();
 
 	}
 
 	/**
 	 * 配置是否允许循环依赖
+	 *
 	 * @param isAllow 默认为true
 	 */
 	private static void configAllowCircular(boolean isAllow) {
@@ -39,12 +41,18 @@ public class App {
 		beanFactory.setAllowCircularReferences(isAllow);
 	}
 
-	private static void cycleBean() {
+	/**
+	 * 循环依赖
+	 */
+	private static void circularDependencyBean() {
 		CustomerService customerService = context.getBean(CustomerService.class);
 		wrapPrintln(customerService.toString());
 	}
 
 
+	/**
+	 * 调用后置处理器替换FirstDog为SecondDog
+	 */
 	private final static void changeBeanFromBeanFactoryPostProcessor() {
 		SecondDog fromSecondDogClass = context.getBean(SecondDog.class);
 		fromSecondDogClass.wangwang();

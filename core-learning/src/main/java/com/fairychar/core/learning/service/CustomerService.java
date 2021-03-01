@@ -41,8 +41,8 @@ public class CustomerService implements InitializingBean {
 
 	@Override
 	public String toString() {
-		return "CustomerService{" +
-				"orderService=" + orderService.hashCode() +
+		return "CustomerService{ this=" +this.hashCode()+
+				"  orderService=" + orderService.hashCode() +
 				'}';
 	}
 }

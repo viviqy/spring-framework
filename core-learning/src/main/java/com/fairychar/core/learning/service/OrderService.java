@@ -16,15 +16,15 @@ public class OrderService {
 	@Autowired
 	private CustomerService customerService;
 
-	public void customerBean(){
+	public void customerBean() {
 		WrapUtil.wrapPrintln(customerService.toString());
 	}
 
 
 	@Override
 	public String toString() {
-		return "OrderService{" +
-				"customerService=" + customerService.hashCode() +
+		return "OrderService{ this=" + this.hashCode() +
+				"  customerService=" + customerService.hashCode() +
 				'}';
 	}
 }
