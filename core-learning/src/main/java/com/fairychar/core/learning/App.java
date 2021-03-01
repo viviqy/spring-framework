@@ -4,6 +4,7 @@ import com.fairychar.core.learning.beans.FirstDog;
 import com.fairychar.core.learning.beans.SecondDog;
 import com.fairychar.core.learning.configuration.AppConfiguration;
 import com.fairychar.core.learning.service.CustomerService;
+import org.springframework.aop.Pointcut;
 import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
