@@ -19,6 +19,7 @@ public class App {
 	private static AnnotationConfigApplicationContext context;
 
 	public static void main(String[] args) {
+
 		context = new AnnotationConfigApplicationContext();
 		configAllowCircular(true);
 		context.register(AppConfiguration.class);

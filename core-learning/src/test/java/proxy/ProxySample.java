@@ -1,5 +1,6 @@
 package proxy;
 
+import org.junit.Test;
 import org.springframework.context.annotation.Scope;
 
 import java.lang.reflect.InvocationHandler;
@@ -16,26 +17,27 @@ import java.lang.reflect.Proxy;
 
 public class ProxySample {
 
-	public static void main(String[] args) {
+	@Test
+	public void test() {
 		UserDao mapper = UserFactory.getMapper(UserDao.class);
 		System.out.println(mapper.findAll());
 	}
 
 
-	interface UserDao {
+	public interface UserDao {
 		@Scope("select * from user")
 		String findAll();
 
 	}
 
-	static class UserFactory {
+	public static class UserFactory {
 		static <T> T getMapper(Class<T> clazz) {
 			Object o = Proxy.newProxyInstance(UserFactory.class.getClassLoader(), new Class[]{clazz}, new UserInvocationHandler());
-			return (T)o;
+			return (T) o;
 		}
 	}
 
-	static class UserInvocationHandler implements InvocationHandler {
+	public static class UserInvocationHandler implements InvocationHandler {
 		@Override
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 			System.out.println("get sql session");
@@ -46,27 +48,27 @@ public class ProxySample {
 	}
 }
 /*
-                                      /[-])//  ___        
-                                 __ --\ `_/~--|  / \      
-                               /_-/~~--~~ /~~~\\_\ /\     
-                               |  |___|===|_-- | \ \ \    
-____________ _/~~~~~~~~|~~\,   ---|---\___/----|  \/\-\   
-____________ ~\________|__/   / // \__ |  ||  / | |   | | 
-                      ,~-|~~~~~\--, | \|--|/~|||  |   | | 
-                      [3-|____---~~ _--'==;/ _,   |   |_| 
-                                  /   /\__|_/  \  \__/--/ 
-                                 /---/_\  -___/ |  /,--|  
-                                 /  /\/~--|   | |  \///   
-                                /  / |-__ \    |/         
-                               |--/ /      |-- | \        
-                              \^~~\\/\      \   \/- _     
-                               \    |  \     |~~\~~| \    
-                                \    \  \     \   \  | \  
-                                  \    \ |     \   \    \ 
-                                   |~~|\/\|     \   \   | 
+                                      /[-])//  ___
+                                 __ --\ `_/~--|  / \
+                               /_-/~~--~~ /~~~\\_\ /\
+                               |  |___|===|_-- | \ \ \
+____________ _/~~~~~~~~|~~\,   ---|---\___/----|  \/\-\
+____________ ~\________|__/   / // \__ |  ||  / | |   | |
+                      ,~-|~~~~~\--, | \|--|/~|||  |   | |
+                      [3-|____---~~ _--'==;/ _,   |   |_|
+                                  /   /\__|_/  \  \__/--/
+                                 /---/_\  -___/ |  /,--|
+                                 /  /\/~--|   | |  \///
+                                /  / |-__ \    |/
+                               |--/ /      |-- | \
+                              \^~~\\/\      \   \/- _
+                               \    |  \     |~~\~~| \
+                                \    \  \     \   \  | \
+                                  \    \ |     \   \    \
+                                   |~~|\/\|     \   \   |
                                   |   |/         \_--_- |\
                                   |  /            /   |/\/
-                                   ~~             /  /    
+                                   ~~             /  /
                                                  |__/   W<
 
 */
