@@ -130,6 +130,8 @@ public abstract class AnnotationConfigUtils {
 
 
 	/**
+	 * note: 实例化spring必须要提前使用的BeanDefinition给实例化
+	 *
 	 * Register all relevant annotation post processors in the given registry.
 	 * @param registry the registry to operate on
 	 */

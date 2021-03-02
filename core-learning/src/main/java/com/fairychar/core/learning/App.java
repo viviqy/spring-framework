@@ -38,6 +38,7 @@ public class App {
 		showBeanDefinition();
 		changeBeanFromBeanFactoryPostProcessor();
 		circularDependencyBean();
+		context.close();
 	}
 
 	private static void showBeanDefinition() {
