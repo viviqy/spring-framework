@@ -1,70 +1,57 @@
-import com.fairychar.core.learning.beans.GenJi;
-import com.fairychar.core.learning.beans.HanZo;
-import com.fairychar.core.learning.configuration.CglibSampleConfiguration;
-import com.fairychar.core.learning.utils.WrapUtil;
+package proxy;
+
 import org.junit.Test;
+import org.springframework.cglib.proxy.Enhancer;
+import org.springframework.cglib.proxy.MethodInterceptor;
+import org.springframework.cglib.proxy.MethodProxy;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.lang.reflect.Method;
+
 /**
- * Datetime: 2020/12/24 12:48 <br>
+ * Datetime: 2021/3/3 22:01 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-public class TestMain {
-	private static final Object LOCK = new Object();
+public class CglibEnhancerProxySample {
 	private  static AnnotationConfigApplicationContext context;
 
 	@Test
-	public void testCglibConfigurationSample(){
-		context = new AnnotationConfigApplicationContext();
-		context.register(CglibSampleConfiguration.class);
-		context.refresh();
-		System.out.println(context.getBean(GenJi.class));
-		System.out.println(context.getBean(HanZo.class));
-		context.close();
+	public void testEnhancer() throws Exception{
+//		context = new AnnotationConfigApplicationContext();
+		Enhancer enhancer = new Enhancer();
+		enhancer.setSuperclass(NotVeryUsefulCglibService.class);
+		enhancer.setCallback(new CglibMethodInterceptor());
+		NotVeryUsefulCglibService cglibService = (NotVeryUsefulCglibService) enhancer.create();
+		System.out.println(cglibService.hello());
+		System.out.println(cglibService);
+//		context.refresh();
+//		context.close();
 	}
 
-	@Test
-	public void testWrap() {
-		WrapUtil.wrapPrintln("hahah");
-	}
 
-	@Test
-	public void testLock() throws InterruptedException {
-		int N = 10;
-		Thread[] threads = new Thread[10];
-		for (int i = 0; i < N; i++) {
-			threads[i] = new Thread(() -> {
-				System.out.println(Thread.currentThread().getName() + " begin...");
-				synchronized (LOCK) {
-					System.out.println(Thread.currentThread().getName() + "get sync lock!");
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}, "thread [" + i + "]");
+	public static class NotVeryUsefulCglibService{
+		public String hello(){
+			System.out.println("in hello");
+			return "hello";
 		}
-		synchronized (LOCK) {
-			for (int i = 0; i < N; i++) {
-				threads[i].start();
-				System.out.println(threads[i].getName() + " start!");
-				Thread.sleep(200);
-			}
-			Thread.sleep(200);
-		}
-		Thread.currentThread().join();
 	}
 
+	public static class CglibMethodInterceptor implements MethodInterceptor{
+		@Override
+		public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
+			System.out.println("in cglib method interceptor...");
+			return methodProxy.invokeSuper(o,method.getParameters());
+		}
+	}
 }
 /*
                                       /[-])//  ___        
                                  __ --\ `_/~--|  / \      
                                /_-/~~--~~ /~~~\\_\ /\     
                                |  |___|===|_-- | \ \ \    
-____________ _/~~~~~~~~|~~\,   ---|---\___/----|  \/\-\   2
+____________ _/~~~~~~~~|~~\,   ---|---\___/----|  \/\-\   
 ____________ ~\________|__/   / // \__ |  ||  / | |   | | 
                       ,~-|~~~~~\--, | \|--|/~|||  |   | | 
                       [3-|____---~~ _--'==;/ _,   |   |_| 
