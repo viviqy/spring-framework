@@ -1,6 +1,7 @@
 import com.fairychar.core.learning.beans.GenJi;
 import com.fairychar.core.learning.beans.HanZo;
 import com.fairychar.core.learning.configuration.CglibSampleConfiguration;
+import com.fairychar.core.learning.configuration.CircularReferenceConfiguration;
 import com.fairychar.core.learning.utils.WrapUtil;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -14,6 +15,12 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class TestMain {
 	private static final Object LOCK = new Object();
 	private  static AnnotationConfigApplicationContext context;
+
+
+	@Test
+	public void testCircularReference(){
+
+	}
 
 	@Test
 	public void testCglibConfigurationSample(){

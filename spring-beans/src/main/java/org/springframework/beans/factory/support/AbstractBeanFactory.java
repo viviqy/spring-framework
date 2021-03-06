@@ -440,7 +440,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		else {
 			// Fail if we're already creating this bean instance:
 			// We're assumably within a circular reference.
-			if (isPrototypeCurrentlyInCreation(beanName)) {
+			boolean prototypeCurrentlyInCreation = isPrototypeCurrentlyInCreation(beanName);
+			if (prototypeCurrentlyInCreation) {
 				throw new BeanCurrentlyInCreationException(beanName);
 			}
 

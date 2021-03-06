@@ -16,17 +16,11 @@ public class OrderService {
 	@Autowired
 	private CustomerService customerService;
 
-	public void customerBean() {
-		WrapUtil.wrapPrintln(customerService.toString());
+	public OrderService() {
+		System.out.println("in orderService constructor...");
 	}
 
 
-	@Override
-	public String toString() {
-		return "OrderService{ this=" + this.hashCode() +
-				"  customerService=" + customerService.hashCode() +
-				'}';
-	}
 }
 /*
                                       /[-])//  ___        

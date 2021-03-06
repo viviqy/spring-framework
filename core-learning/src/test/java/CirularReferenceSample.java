@@ -1,29 +1,22 @@
-package com.fairychar.core.learning.service;
-
-import com.fairychar.core.learning.utils.WrapUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.fairychar.core.learning.configuration.CircularReferenceConfiguration;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * Datetime: 2020/12/22 15:25 <br>
+ * Datetime: 2021/3/5 16:03 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-@Service
-public class CustomerService {
+public class CirularReferenceSample {
+	private  static AnnotationConfigApplicationContext context;
 
-	@Autowired
-	private OrderService orderService;
-
-
-	public CustomerService() {
-		System.out.println("in customerService constructor...");
+	public static void main(String[] args) {
+		context=new AnnotationConfigApplicationContext();
+		context.register(CircularReferenceConfiguration.class);
+		context.refresh();
+		System.out.println(context.getBean("customerService"));
+		System.out.println(context.getBean("orderService"));
 	}
-
-
-
-
 }
 /*
                                       /[-])//  ___        

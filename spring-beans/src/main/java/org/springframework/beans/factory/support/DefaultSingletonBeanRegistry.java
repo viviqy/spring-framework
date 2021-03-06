@@ -181,7 +181,8 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 		/*note 获取bean*/
 		// Quick check for existing instance without full singleton lock
 		Object singletonObject = this.singletonObjects.get(beanName);
-		if (singletonObject == null && isSingletonCurrentlyInCreation(beanName)) {
+		boolean singletonCurrentlyInCreation = isSingletonCurrentlyInCreation(beanName);
+		if (singletonObject == null && singletonCurrentlyInCreation) {
 			singletonObject = this.earlySingletonObjects.get(beanName);
 			if (singletonObject == null && allowEarlyReference) {
 				synchronized (this.singletonObjects) {

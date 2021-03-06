@@ -10,6 +10,11 @@ import java.util.stream.IntStream;
  */
 public final class WrapUtil {
 
+	public static void beautyToString(Object o){
+		String className = o.getClass().getName();
+
+	}
+
 	public static void wrapPrintln(String text) {
 		System.out.println();
 		IntStream.range(0, text.length() + 6).forEach(s -> {
