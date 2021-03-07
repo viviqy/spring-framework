@@ -1,7 +1,7 @@
 package com.fairychar.core.learning.service;
 
-import com.fairychar.core.learning.utils.WrapUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
-public class CustomerService {
+public class CustomerService implements Ordered {
 
 	@Autowired
 	private OrderService orderService;
@@ -22,8 +22,10 @@ public class CustomerService {
 	}
 
 
-
-
+	@Override
+	public int getOrder() {
+		return 0;
+	}
 }
 /*
                                       /[-])//  ___        
