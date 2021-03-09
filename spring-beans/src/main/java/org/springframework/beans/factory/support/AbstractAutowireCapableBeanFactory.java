@@ -612,6 +612,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		try {
 			/*note: 在这一步填充对象属性*/
 			populateBean(beanName, mbd, instanceWrapper);
+			/*执行生命周期方法*/
 			exposedObject = initializeBean(beanName, exposedObject, mbd);
 		}
 		catch (Throwable ex) {
@@ -1778,6 +1779,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			}, getAccessControlContext());
 		}
 		else {
+			/*执行实现了aware接口的方法*/
 			invokeAwareMethods(beanName, bean);
 		}
 

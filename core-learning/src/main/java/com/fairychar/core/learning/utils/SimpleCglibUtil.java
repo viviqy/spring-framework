@@ -1,40 +1,23 @@
-package proxy;
+package com.fairychar.core.learning.utils;
 
 import com.fairychar.core.learning.interceptor.CglibMethodInterceptor;
-import org.junit.Test;
 import org.springframework.cglib.proxy.Enhancer;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * Datetime: 2021/3/3 22:01 <br>
+ * Datetime: 2021/3/9 11:18 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-public class CglibEnhancerProxySample {
-	private  static AnnotationConfigApplicationContext context;
+public class SimpleCglibUtil {
 
-	@Test
-	public void testEnhancer() throws Exception{
-//		context = new AnnotationConfigApplicationContext();
+	@SuppressWarnings("unchecked")
+	public static <T> T proxy(Class<T> beanClass) {
 		Enhancer enhancer = new Enhancer();
-		enhancer.setSuperclass(NotVeryUsefulCglibService.class);
+		enhancer.setSuperclass(beanClass);
 		enhancer.setCallback(new CglibMethodInterceptor());
-		NotVeryUsefulCglibService cglibService = (NotVeryUsefulCglibService) enhancer.create();
-		System.out.println(cglibService.hello());
-		System.out.println(cglibService);
-//		context.refresh();
-//		context.close();
+		return (T) enhancer.create();
 	}
-
-
-	public static class NotVeryUsefulCglibService{
-		public String hello(){
-			System.out.println("in hello");
-			return "hello";
-		}
-	}
-
 }
 /*
                                       /[-])//  ___        

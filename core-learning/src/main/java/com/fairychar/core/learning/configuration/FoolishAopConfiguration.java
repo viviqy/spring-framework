@@ -1,39 +1,23 @@
-package proxy;
+package com.fairychar.core.learning.configuration;
 
-import com.fairychar.core.learning.interceptor.CglibMethodInterceptor;
-import org.junit.Test;
-import org.springframework.cglib.proxy.Enhancer;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import com.fairychar.core.learning.proccessor.SimpleAopPostProcessor;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Import;
 
 /**
- * Datetime: 2021/3/3 22:01 <br>
+ * Datetime: 2021/3/9 11:41 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-public class CglibEnhancerProxySample {
-	private  static AnnotationConfigApplicationContext context;
+@ComponentScan("com.fairychar.core.learning.service")
+@EnableAspectJAutoProxy
+@Import(SimpleAopPostProcessor.class)
+@Configuration
+public class FoolishAopConfiguration {
 
-	@Test
-	public void testEnhancer() throws Exception{
-//		context = new AnnotationConfigApplicationContext();
-		Enhancer enhancer = new Enhancer();
-		enhancer.setSuperclass(NotVeryUsefulCglibService.class);
-		enhancer.setCallback(new CglibMethodInterceptor());
-		NotVeryUsefulCglibService cglibService = (NotVeryUsefulCglibService) enhancer.create();
-		System.out.println(cglibService.hello());
-		System.out.println(cglibService);
-//		context.refresh();
-//		context.close();
-	}
-
-
-	public static class NotVeryUsefulCglibService{
-		public String hello(){
-			System.out.println("in hello");
-			return "hello";
-		}
-	}
 
 }
 /*

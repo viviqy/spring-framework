@@ -1,40 +1,49 @@
-package proxy;
+package com.fairychar.core.learning.service.aop;
 
-import com.fairychar.core.learning.interceptor.CglibMethodInterceptor;
-import org.junit.Test;
-import org.springframework.cglib.proxy.Enhancer;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
 
 /**
- * Datetime: 2021/3/3 22:01 <br>
+ * Datetime: 2021/3/9 15:36 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-public class CglibEnhancerProxySample {
-	private  static AnnotationConfigApplicationContext context;
+@Aspect
+@Component
+public class ComplexServiceAspectJ {
 
-	@Test
-	public void testEnhancer() throws Exception{
-//		context = new AnnotationConfigApplicationContext();
-		Enhancer enhancer = new Enhancer();
-		enhancer.setSuperclass(NotVeryUsefulCglibService.class);
-		enhancer.setCallback(new CglibMethodInterceptor());
-		NotVeryUsefulCglibService cglibService = (NotVeryUsefulCglibService) enhancer.create();
-		System.out.println(cglibService.hello());
-		System.out.println(cglibService);
-//		context.refresh();
-//		context.close();
+
+	/**
+	 * 切所有参数的方法
+	 */
+	@Pointcut("execution(public * com.fairychar.core.learning.service.aop.*.*(..))")
+	public void simpleShow() {
+
+	}
+
+	@Pointcut("args(java.lang.String)")
+	public void argsShow() {
 	}
 
 
-	public static class NotVeryUsefulCglibService{
-		public String hello(){
-			System.out.println("in hello");
-			return "hello";
-		}
+	@Before("argsShow()")
+	public void argsBefore() {
+		System.out.println("xxxxx");
 	}
 
+	@Before("simpleShow() &&! argsShow()")
+	public void complexBefore() {
+		System.out.println("yyyyy");
+	}
+
+
+//	@Before("execution(public * com.fairychar.core.learning.service.aop.*.*(..)) && args(java.lang.String)")
+//	public void complexBefore(){
+//		System.out.println("yyyyy");
+//	}
 }
 /*
                                       /[-])//  ___        

@@ -17,6 +17,12 @@ public class CglibSampleConfiguration {
 	@Bean
 	HanZo hanZo() {
 		genJi();//并不会执行此方法
+		genJi();//并不会执行此方法
+		genJi();//并不会执行此方法
+		genJi();//并不会执行此方法
+		genJi();//并不会执行此方法
+		genJi();//并不会执行此方法
+		genJi();//并不会执行此方法
 		return new HanZo();
 	}
 

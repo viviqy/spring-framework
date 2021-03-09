@@ -1,40 +1,22 @@
-package proxy;
+package com.fairychar.core.learning.interceptor;
 
-import com.fairychar.core.learning.interceptor.CglibMethodInterceptor;
-import org.junit.Test;
-import org.springframework.cglib.proxy.Enhancer;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.cglib.proxy.MethodInterceptor;
+import org.springframework.cglib.proxy.MethodProxy;
+
+import java.lang.reflect.Method;
 
 /**
- * Datetime: 2021/3/3 22:01 <br>
+ * Datetime: 2021/3/9 11:35 <br>
  *
  * @author chiyo <br>
- * @since 1.0
+ * @since
  */
-public class CglibEnhancerProxySample {
-	private  static AnnotationConfigApplicationContext context;
-
-	@Test
-	public void testEnhancer() throws Exception{
-//		context = new AnnotationConfigApplicationContext();
-		Enhancer enhancer = new Enhancer();
-		enhancer.setSuperclass(NotVeryUsefulCglibService.class);
-		enhancer.setCallback(new CglibMethodInterceptor());
-		NotVeryUsefulCglibService cglibService = (NotVeryUsefulCglibService) enhancer.create();
-		System.out.println(cglibService.hello());
-		System.out.println(cglibService);
-//		context.refresh();
-//		context.close();
+public class CglibMethodInterceptor implements MethodInterceptor {
+	@Override
+	public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
+		System.out.println(o.getClass().getSimpleName() + " in cglib method interceptor...");
+		return methodProxy.invokeSuper(o, objects);
 	}
-
-
-	public static class NotVeryUsefulCglibService{
-		public String hello(){
-			System.out.println("in hello");
-			return "hello";
-		}
-	}
-
 }
 /*
                                       /[-])//  ___        

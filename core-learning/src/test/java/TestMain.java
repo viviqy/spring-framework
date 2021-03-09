@@ -5,6 +5,7 @@ import com.fairychar.core.learning.configuration.CircularReferenceConfiguration;
 import com.fairychar.core.learning.utils.WrapUtil;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Datetime: 2020/12/24 12:48 <br>
@@ -19,7 +20,6 @@ public class TestMain {
 
 	@Test
 	public void testCircularReference(){
-
 	}
 
 	@Test
@@ -29,6 +29,7 @@ public class TestMain {
 		context.refresh();
 		System.out.println(context.getBean(GenJi.class));
 		System.out.println(context.getBean(HanZo.class));
+		System.out.println(context.getBean(CglibSampleConfiguration.class));
 		context.close();
 	}
 

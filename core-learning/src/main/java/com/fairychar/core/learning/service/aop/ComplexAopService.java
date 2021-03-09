@@ -1,40 +1,28 @@
-package proxy;
+package com.fairychar.core.learning.service.aop;
 
-import com.fairychar.core.learning.interceptor.CglibMethodInterceptor;
-import org.junit.Test;
-import org.springframework.cglib.proxy.Enhancer;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Service;
 
 /**
- * Datetime: 2021/3/3 22:01 <br>
+ * Datetime: 2021/3/9 15:11 <br>
  *
  * @author chiyo <br>
  * @since 1.0
  */
-public class CglibEnhancerProxySample {
-	private  static AnnotationConfigApplicationContext context;
+@Service
+public class ComplexAopService {
 
-	@Test
-	public void testEnhancer() throws Exception{
-//		context = new AnnotationConfigApplicationContext();
-		Enhancer enhancer = new Enhancer();
-		enhancer.setSuperclass(NotVeryUsefulCglibService.class);
-		enhancer.setCallback(new CglibMethodInterceptor());
-		NotVeryUsefulCglibService cglibService = (NotVeryUsefulCglibService) enhancer.create();
-		System.out.println(cglibService.hello());
-		System.out.println(cglibService);
-//		context.refresh();
-//		context.close();
+	public void show(){
+		System.out.println("complex aop service...");
 	}
 
-
-	public static class NotVeryUsefulCglibService{
-		public String hello(){
-			System.out.println("in hello");
-			return "hello";
-		}
+	public String show(String source){
+		System.out.println("complex aop service args="+source);
+		return "complex: "+source;
 	}
 
+	public String show(String source,String concat){
+		return source+":"+concat;
+	}
 }
 /*
                                       /[-])//  ___        
