@@ -24,6 +24,15 @@ public class ComplexServiceAspectJ {
 
 	}
 
+//	/**
+//	 * within最大力度只能指定到类,而execution可以指定到方法的返回值,参数个数,方法名等
+//	 */
+//	@Pointcut("within(com.fairychar.core.learning.service.aop.ComplexAopService)")
+//	public void simpleShowWithin() {
+//
+//	}
+
+
 	@Pointcut("args(java.lang.String)")
 	public void argsShow() {
 	}
@@ -40,6 +49,14 @@ public class ComplexServiceAspectJ {
 	}
 
 
+	/**
+	 * 必须代理当前IJdkProxyService,并通过getBean获取IJdkProxyService才能取出代理对象
+	 * 并实现aop的代理,如果是代理JdkProxyService,则无法代理到接口方法,起不到代理作用
+	 */
+	@Before("this(com.fairychar.core.learning.service.aop.IJdkProxyService)")
+	public void jdkBefore() {
+		System.out.println("zzzzz");
+	}
 //	@Before("execution(public * com.fairychar.core.learning.service.aop.*.*(..)) && args(java.lang.String)")
 //	public void complexBefore(){
 //		System.out.println("yyyyy");

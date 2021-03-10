@@ -22,6 +22,10 @@ public class CustomerService implements Ordered {
 	}
 
 
+	public void show(){
+		System.out.println("in customer Service show method...");
+	}
+
 	@Override
 	public int getOrder() {
 		return 0;
